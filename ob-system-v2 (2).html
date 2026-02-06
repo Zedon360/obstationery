@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OB Ads & Media — Business Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+:root {
+    --bg-base: #07090f;
+    --bg-raised: #0d1117;
+    --bg-card: #131921;
+    --bg-card2: #171f2b;
+    --bg-input: #0b0f18;
+    --border: #1e2a3a;
+    --border-focus: #e8a735;
+    --text-1: #eef1f6;
+    --text-2: #8b99ad;
+    --text-3: #4f5d73;
+    --gold: #e8a735;
+    --gold-dim: rgba(232,167,53,0.12);
+    --gold-glow: rgba(232,167,53,0.25);
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.1);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.1);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.1);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.1);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.1);
+    --teal: #14b8a6;
+    --teal-dim: rgba(20,184,166,0.1);
+    --r: 10px;
+    --r2: 14px;
+    --font: 'Outfit', sans-serif;
+    --font-d: 'Fraunces', serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg-base);color:var(--text-1);min-height:100vh;overflow-x:hidden;}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg-base);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;}
+
+/* ========== LOGIN ========== */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:radial-gradient(ellipse at 30% 40%,rgba(232,167,53,0.06) 0%,transparent 60%),
+             radial-gradient(ellipse at 70% 70%,rgba(59,130,246,0.04) 0%,transparent 60%),var(--bg-base);}
+.login-box{width:100%;max-width:400px;animation:rise .5s ease-out;}
+@keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.login-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);padding:44px 32px;box-shadow:0 12px 48px rgba(0,0,0,.4);}
+.login-brand{text-align:center;margin-bottom:32px;}
+.login-brand .ico{width:52px;height:52px;background:linear-gradient(135deg,var(--gold),#d4911f);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;box-shadow:0 4px 16px var(--gold-glow);}
+.login-brand h1{font-family:var(--font-d);font-size:24px;letter-spacing:-.02em;}
+.login-brand p{color:var(--text-3);font-size:12px;letter-spacing:.6px;text-transform:uppercase;margin-top:4px;}
+.fg{margin-bottom:18px;}
+.fg label{display:block;font-size:12px;font-weight:500;color:var(--text-2);margin-bottom:5px;letter-spacing:.3px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 13px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r);color:var(--text-1);font-size:13px;font-family:var(--font);transition:border .2s,box-shadow .2s;}
+.fg textarea{resize:vertical;min-height:70px;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim);}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text-3);}
+.chk-row{display:flex;align-items:center;gap:8px;margin-bottom:22px;}
+.chk-row input[type=checkbox]{width:15px;height:15px;accent-color:var(--gold);cursor:pointer;}
+.chk-row label{color:var(--text-3);font-size:12px;cursor:pointer;}
+.login-err{background:var(--red-dim);border:1px solid rgba(239,68,68,.3);color:var(--red);padding:10px 13px;border-radius:var(--r);font-size:12px;margin-bottom:14px;display:none;}
+.login-err.show{display:block;animation:shake .35s ease;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+
+/* ========== BUTTONS ========== */
+.btn{width:100%;padding:11px 18px;border:none;border-radius:var(--r);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s;letter-spacing:.3px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#c98e1e);color:#000;box-shadow:0 2px 10px var(--gold-glow);}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 4px 18px var(--gold-glow);}
+.btn-green{background:var(--green);color:#fff;}.btn-green:hover{background:#16a34a;}
+.btn-red{background:var(--red);color:#fff;}.btn-red:hover{background:#dc2626;}
+.btn-amber{background:var(--amber);color:#000;}.btn-amber:hover{background:#d97706;}
+.btn-blue{background:var(--blue);color:#fff;}.btn-blue:hover{background:#2563eb;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-2);}.btn-ghost:hover{background:var(--bg-card2);border-color:var(--text-3);}
+.btn-sm{width:auto;padding:5px 12px;font-size:11px;}
+.btn-xs{width:auto;padding:3px 8px;font-size:10px;}
+
+/* ========== APP LAYOUT ========== */
+.app{display:none;}
+.app.on{display:block;}
+.topbar{background:var(--bg-card);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.tb-brand{display:flex;align-items:center;gap:10px;}
+.tb-brand .ico{width:32px;height:32px;background:linear-gradient(135deg,var(--gold),#c98e1e);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.tb-brand h1{font-family:var(--font-d);font-size:16px;}
+.tb-brand span{font-size:11px;color:var(--text-3);}
+.tb-right{display:flex;align-items:center;gap:14px;}
+.u-pill{display:flex;align-items:center;gap:8px;background:var(--bg-input);padding:5px 12px 5px 6px;border-radius:18px;border:1px solid var(--border);}
+.u-av{width:26px;height:26px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#000;}
+.u-pill .nm{font-size:12px;font-weight:500;}
+.u-pill .rl{font-size:10px;color:var(--text-3);}
+.btn-out{padding:6px 14px;background:transparent;border:1px solid rgba(239,68,68,.35);color:var(--red);border-radius:5px;cursor:pointer;font-size:11px;font-weight:600;font-family:var(--font);transition:all .2s;}
+.btn-out:hover{background:var(--red-dim);border-color:var(--red);}
+
+/* NAV */
+.nav{background:var(--bg-raised);border-bottom:1px solid var(--border);padding:0 24px;display:flex;gap:1px;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-btn{padding:13px 16px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-3);font-size:12px;font-weight:500;font-family:var(--font);cursor:pointer;white-space:nowrap;transition:all .2s;}
+.nav-btn:hover{color:var(--text-2);}
+.nav-btn.on{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* MAIN */
+.main{max-width:1340px;margin:0 auto;padding:24px;}
+.panel{display:none;}.panel.on{display:block;animation:fadeUp .25s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px;}
+.st{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:border .2s;}
+.st:hover{border-color:var(--gold);}
+.st-label{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-3);margin-bottom:8px;}
+.st-val{font-size:26px;font-weight:700;line-height:1;}
+.st-unit{font-size:11px;color:var(--text-3);margin-top:5px;}
+.c-green{color:var(--green);}.c-red{color:var(--red);}.c-amber{color:var(--amber);}.c-purple{color:var(--purple);}.c-blue{color:var(--blue);}
+
+/* CARD */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:18px;}
+.card-t{font-size:15px;font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.card-t .ic{font-size:16px;}
+.fr{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:12px;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin-top:14px;}
+thead th{text-align:left;padding:9px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-3);border-bottom:1px solid var(--border);background:var(--bg-input);}
+tbody td{padding:10px;font-size:12px;border-bottom:1px solid rgba(30,42,58,.5);color:var(--text-2);}
+tbody tr:hover{background:var(--bg-card2);}
+
+/* BADGE */
+.badge{padding:2px 9px;border-radius:16px;font-size:10px;font-weight:600;display:inline-block;}
+.b-green{background:var(--green-dim);color:var(--green);}.b-red{background:var(--red-dim);color:var(--red);}
+.b-amber{background:var(--amber-dim);color:var(--amber);}.b-blue{background:var(--blue-dim);color:var(--blue);}
+.b-purple{background:var(--purple-dim);color:var(--purple);}.b-teal{background:var(--teal-dim);color:var(--teal);}
+
+/* CHART */
+.chart-box{position:relative;height:280px;margin:14px 0;}
+
+/* ALERT */
+.al{padding:12px 14px;border-radius:var(--r);margin-bottom:10px;font-size:12px;border-left:3px solid;}
+.al-green{background:var(--green-dim);border-color:var(--green);color:var(--green);}
+.al-red{background:var(--red-dim);border-color:var(--red);color:var(--red);}
+.al-amber{background:var(--amber-dim);border-color:var(--amber);color:var(--amber);}
+.al-blue{background:var(--blue-dim);border-color:var(--blue);color:var(--blue);}
+
+/* TAGS / CHIPS for custom categories */
+.chip-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--bg-card2);border:1px solid var(--border);border-radius:16px;font-size:11px;color:var(--text-2);}
+.chip .del{background:none;border:none;color:var(--red);cursor:pointer;font-size:13px;line-height:1;padding:0 2px;font-weight:700;}
+.chip .del:hover{color:#ff6b6b;}
+.add-chip-row{display:flex;gap:6px;margin-top:10px;}
+.add-chip-row input{flex:1;padding:7px 10px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r);color:var(--text-1);font-size:12px;font-family:var(--font);}
+.add-chip-row input:focus{outline:none;border-color:var(--gold);}
+.add-chip-row button{padding:7px 14px;border-radius:var(--r);}
+
+/* MODAL */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:1000;align-items:center;justify-content:center;padding:20px;}
+.modal-ov.open{display:flex;}
+.modal-bx{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);padding:28px;max-width:540px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,.5);animation:rise .25s ease;}
+.modal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.modal-hd h2{font-size:16px;font-weight:600;}
+.modal-x{width:28px;height:28px;background:var(--bg-input);border:1px solid var(--border);border-radius:5px;color:var(--text-3);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.modal-x:hover{background:var(--red-dim);color:var(--red);border-color:var(--red);}
+
+/* TOAST */
+.toast-c{position:fixed;top:16px;right:16px;z-index:2000;display:flex;flex-direction:column;gap:6px;}
+.toast{padding:12px 18px;border-radius:var(--r);font-size:12px;font-weight:500;box-shadow:0 6px 24px rgba(0,0,0,.4);animation:slideR .25s ease;display:flex;align-items:center;gap:8px;min-width:260px;}
+@keyframes slideR{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+.toast-ok{background:#065f46;color:#d1fae5;border:1px solid var(--green);}
+.toast-err{background:#7f1d1d;color:#fee2e2;border:1px solid var(--red);}
+.toast-info{background:#1e3a5f;color:#dbeafe;border:1px solid var(--blue);}
+
+.hidden{display:none!important;}
+
+@media(max-width:768px){.stats{grid-template-columns:1fr 1fr;}.fr{grid-template-columns:1fr;}.topbar{padding:10px 14px;}.main{padding:14px;}.tb-brand span{display:none;}.login-card{padding:28px 20px;}}
+@media(max-width:480px){.stats{grid-template-columns:1fr;}}
+@media print{.topbar,.nav,.btn,button,.action-btn{display:none!important;}.card{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid;}body{background:#fff;color:#000;}.st-val,.card-t,td,th{color:#000!important;}}
+    </style>
+</head>
+<body>
+
+<div class="toast-c" id="toastC"></div>
+
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen" class="login-wrap">
+    <div class="login-box">
+        <div class="login-card">
+            <div class="login-brand">
+                <div class="ico">📊</div>
+                <h1>OB Ads & Media</h1>
+                <p>Business Management System</p>
+            </div>
+            <div class="login-err" id="loginErr"></div>
+            <form onsubmit="doLogin(event)">
+                <div class="fg"><label>Username</label><input type="text" id="lUser" required autocomplete="username" placeholder="Enter username"></div>
+                <div class="fg"><label>Password</label><div style="position:relative;"><input type="password" id="lPass" required autocomplete="current-password" placeholder="Enter password" style="padding-right:42px;"><button type="button" onclick="togglePw()" id="pwToggle" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;padding:4px;" title="Show password">👁️</button></div></div>
+                <div class="chk-row"><input type="checkbox" id="lRem"><label for="lRem">Remember me</label></div>
+                <button type="submit" class="btn btn-gold">Sign In</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app" class="app">
+    <div class="topbar">
+        <div class="tb-brand"><div class="ico">📊</div><div><h1>OB Ads & Media</h1><span>Services & Management</span></div></div>
+        <div class="tb-right">
+            <div class="u-pill"><div class="u-av" id="uAv">Z</div><div><div class="nm" id="uNm">–</div><div class="rl" id="uRl">–</div></div></div>
+            <button class="btn-out" onclick="doLogout()">Sign Out</button>
+        </div>
+    </div>
+    <div class="nav" id="navBar">
+        <button class="nav-btn on" data-t="dash">Dashboard</button>
+        <button class="nav-btn" data-t="sales">Sales</button>
+        <button class="nav-btn" data-t="expenses">Expenses</button>
+        <button class="nav-btn" data-t="inventory" data-perm="admin">Inventory</button>
+        <button class="nav-btn" data-t="services" data-perm="admin">Services</button>
+        <button class="nav-btn" data-t="machines" data-perm="admin">Machines</button>
+        <button class="nav-btn" data-t="categories" data-perm="admin">Categories</button>
+        <button class="nav-btn" data-t="debts">Debts</button>
+        <button class="nav-btn" data-t="reports">Reports</button>
+        <button class="nav-btn" data-t="users" data-perm="director">Users</button>
+    </div>
+    <div class="main">
+
+<!-- ===== DASHBOARD ===== -->
+<div id="p-dash" class="panel on">
+    <div class="stats">
+        <div class="st"><div class="st-label">Today's Sales</div><div class="st-val c-green" id="dSales">0</div><div class="st-unit">TSh</div></div>
+        <div class="st"><div class="st-label">Today's Expenses</div><div class="st-val c-red" id="dExp">0</div><div class="st-unit">TSh</div></div>
+        <div class="st"><div class="st-label">Today's Profit</div><div class="st-val c-amber" id="dProfit">0</div><div class="st-unit">TSh</div></div>
+        <div class="st"><div class="st-label">Outstanding Debts</div><div class="st-val c-purple" id="dDebts">0</div><div class="st-unit">TSh</div></div>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📈</span> Sales & Expenses (7 Days)</div><div class="chart-box"><canvas id="mainChart"></canvas></div></div>
+    <div class="card"><div class="card-t"><span class="ic">⚠️</span> Low Stock & Ink Alerts</div><div id="alertsBox"></div></div>
+</div>
+
+<!-- ===== SALES (services only) ===== -->
+<div id="p-sales" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">💰</span> Record Service Sale</div>
+        <form onsubmit="submitSale(event)" id="saleForm">
+            <div class="fr">
+                <div class="fg"><label>Category *</label><select id="slCat" required><option value="">Select category first...</option></select></div>
+                <div class="fg"><label>Service *</label><select id="slSvc" required><option value="">Select category first...</option></select></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Quantity / Pages *</label><input type="number" id="slQty" min="1" required></div>
+                <div class="fg"><label>Unit Price (TSh) *</label><input type="number" id="slPrice" step="0.01" required></div>
+                <div class="fg"><label>Subtotal (TSh)</label><input type="text" id="slTotal" readonly></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Discount (TSh)</label><input type="number" id="slDiscount" step="0.01" min="0" value="0" placeholder="0"></div>
+                <div class="fg"><label>Final Amount (TSh)</label><input type="text" id="slFinal" readonly style="font-weight:700;color:var(--green);"></div>
+            </div>
+            <div id="slLinkedInfo" class="al al-blue" style="display:none;margin-bottom:14px;"></div>
+            <div class="fr">
+                <div class="fg"><label>Customer Name</label><input type="text" id="slCust" placeholder="Walk-in Customer"></div>
+                <div class="fg"><label>Payment *</label><select id="slPay"><option>Cash</option><option>Mobile Money</option><option>Bank Transfer</option><option>Credit (Debt)</option></select></div>
+            </div>
+            <div class="fg"><label>Notes</label><textarea id="slNotes" placeholder="Optional..."></textarea></div>
+            <button type="submit" class="btn btn-green">Record Sale</button>
+        </form>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Recent Sales</div><div style="overflow-x:auto;"><table><thead><tr><th>Date</th><th>Service</th><th>Qty</th><th>Price</th><th>Subtotal</th><th>Discount</th><th>Total</th><th>Customer</th><th>Payment</th><th>Inventory</th><th>Machine</th><th>Actions</th></tr></thead><tbody id="tbSales"></tbody></table></div></div>
+</div>
+
+<!-- ===== EXPENSES ===== -->
+<div id="p-expenses" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">📤</span> Record Expense</div>
+        <form onsubmit="submitExpense(event)">
+            <div class="fr">
+                <div class="fg"><label>Category *</label><select id="exCat" required></select></div>
+                <div class="fg"><label>Amount (TSh) *</label><input type="number" id="exAmt" step="0.01" required></div>
+            </div>
+            <div class="fg"><label>Description *</label><textarea id="exDesc" required placeholder="Describe..."></textarea></div>
+            <button type="submit" class="btn btn-green">Record Expense</button>
+        </form>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Recent Expenses</div><div style="overflow-x:auto;"><table><thead><tr><th>Date</th><th>Category</th><th>Description</th><th>Amount</th><th>By</th><th>Actions</th></tr></thead><tbody id="tbExp"></tbody></table></div></div>
+</div>
+
+<!-- ===== INVENTORY (materials/consumables) ===== -->
+<div id="p-inventory" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">📦</span> Add Inventory Item</div>
+        <form onsubmit="submitInventory(event)">
+            <div class="fr">
+                <div class="fg"><label>Item Name *</label><input type="text" id="invName" required placeholder="e.g. A4 Plain Paper"></div>
+                <div class="fg"><label>Unit *</label><select id="invUnit" required></select></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Initial Quantity *</label><input type="number" id="invQty" min="0" required placeholder="e.g. 500"></div>
+                <div class="fg"><label>Min Stock Alert *</label><input type="number" id="invMin" min="0" value="50" required></div>
+            </div>
+            <button type="submit" class="btn btn-green">Add Item</button>
+        </form>
+    </div>
+    <div class="card">
+        <div class="card-t"><span class="ic">🔄</span> Restock Inventory</div>
+        <form onsubmit="submitRestock(event)">
+            <div class="fr">
+                <div class="fg"><label>Item *</label><select id="rsItem" required><option value="">Select...</option></select></div>
+                <div class="fg"><label>Add Quantity *</label><input type="number" id="rsQty" min="1" required></div>
+            </div>
+            <div class="fg"><label>Reason</label><input type="text" id="rsReason" placeholder="e.g. New purchase"></div>
+            <button type="submit" class="btn btn-amber">Restock</button>
+        </form>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Current Inventory</div><div style="overflow-x:auto;"><table><thead><tr><th>Item</th><th>Unit</th><th>Current Qty</th><th>Min Alert</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tbInv"></tbody></table></div></div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<div id="p-services" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">🛠️</span> Add Service</div>
+        <form onsubmit="submitService(event)">
+            <div class="fr">
+                <div class="fg"><label>Service Name *</label><input type="text" id="svcName" required placeholder="e.g. A4 Color Printing"></div>
+                <div class="fg"><label>Category *</label><select id="svcCat" required></select></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Unit *</label><select id="svcUnit" required></select></div>
+                <div class="fg"><label>Default Price (TSh) *</label><input type="number" id="svcPrice" step="0.01" required></div>
+            </div>
+            <div class="fr">
+                <div class="fg">
+                    <label>Uses Inventory? *</label>
+                    <select id="svcUsesInv" onchange="toggleSvcInv()"><option value="no">No</option><option value="yes">Yes</option></select>
+                </div>
+                <div class="fg" id="svcInvGroup" style="display:none">
+                    <label>Which Inventory Item? *</label>
+                    <select id="svcInvItem"><option value="">Select...</option></select>
+                </div>
+                <div class="fg" id="svcInvQtyGroup" style="display:none">
+                    <label>Qty Used Per Unit of Service *</label>
+                    <input type="number" id="svcInvQtyPer" min="1" value="1" placeholder="e.g. 1 paper per page">
+                </div>
+            </div>
+            <div class="fr">
+                <div class="fg">
+                    <label>Uses Machine? *</label>
+                    <select id="svcUsesMac" onchange="toggleSvcMac()"><option value="no">No</option><option value="yes">Yes</option></select>
+                </div>
+                <div class="fg" id="svcMacGroup" style="display:none">
+                    <label>Which Machine? *</label>
+                    <select id="svcMacItem"><option value="">Select...</option></select>
+                </div>
+            </div>
+            <div class="fg"><label>Description</label><textarea id="svcDesc" placeholder="Optional..."></textarea></div>
+            <button type="submit" class="btn btn-green">Add Service</button>
+        </form>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Services</div><div class="fg" style="max-width:250px;margin-bottom:10px;"><label>Filter by Category</label><select id="svcFilter" onchange="rSvc()"><option value="">All Categories</option></select></div><div style="overflow-x:auto;"><table><thead><tr><th>Name</th><th>Category</th><th>Unit</th><th>Price</th><th>Uses Inventory</th><th>Inventory Item</th><th>Qty/Unit</th><th>Uses Machine</th><th>Machine</th><th>Actions</th></tr></thead><tbody id="tbSvc"></tbody></table></div></div>
+</div>
+
+<!-- ===== MACHINES ===== -->
+<div id="p-machines" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">🖨️</span> Add Machine</div>
+        <form onsubmit="submitMachine(event)">
+            <div class="fr">
+                <div class="fg"><label>Machine Name *</label><input type="text" id="macName" required placeholder="e.g. HP Color Printer 1"></div>
+                <div class="fg"><label>Type *</label><select id="macType" required></select></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Serial Number</label><input type="text" id="macSerial"></div>
+                <div class="fg"><label>Purchase Date</label><input type="date" id="macDate"></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Ink Capacity (Pages) *</label><input type="number" id="macInkCap" min="1" required placeholder="e.g. 1000 pages per cartridge"></div>
+                <div class="fg"><label>Current Ink Pages Remaining *</label><input type="number" id="macInkCur" min="0" required placeholder="e.g. 1000"></div>
+            </div>
+            <div class="fg"><label>Low Ink Alert (Pages) *</label><input type="number" id="macInkAlert" min="1" value="100" required></div>
+            <div class="fg"><label>Notes</label><textarea id="macNotes" placeholder="Optional..."></textarea></div>
+            <button type="submit" class="btn btn-green">Add Machine</button>
+        </form>
+    </div>
+    <div class="card">
+        <div class="card-t"><span class="ic">🔄</span> Refill Ink / Reset Counter</div>
+        <form onsubmit="submitInkRefill(event)">
+            <div class="fr">
+                <div class="fg"><label>Machine *</label><select id="rfMac" required><option value="">Select...</option></select></div>
+                <div class="fg"><label>New Ink Pages *</label><input type="number" id="rfPages" min="1" required placeholder="Pages after refill"></div>
+            </div>
+            <button type="submit" class="btn btn-amber">Refill Ink</button>
+        </form>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Machines</div><div style="overflow-x:auto;"><table><thead><tr><th>Name</th><th>Type</th><th>Serial</th><th>Ink Capacity</th><th>Ink Remaining</th><th>Ink %</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tbMac"></tbody></table></div></div>
+</div>
+
+<!-- ===== CATEGORIES (fully customizable) ===== -->
+<div id="p-categories" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">🏷️</span> Manage Categories & Units</div>
+        <p style="color:var(--text-3);font-size:12px;margin-bottom:18px;">Add or remove categories and units used across the system. Changes take effect immediately in all dropdown menus.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+            <!-- Service Categories -->
+            <div class="card" style="margin:0;background:var(--bg-card2);">
+                <div class="card-t" style="font-size:13px;">📋 Service Categories</div>
+                <div class="chip-list" id="chips-serviceCategories"></div>
+                <div class="add-chip-row"><input type="text" id="add-serviceCategories" placeholder="New category..."><button class="btn btn-green btn-xs" onclick="addChip('serviceCategories')">Add</button></div>
+            </div>
+            <!-- Service Units -->
+            <div class="card" style="margin:0;background:var(--bg-card2);">
+                <div class="card-t" style="font-size:13px;">📏 Service Units</div>
+                <div class="chip-list" id="chips-serviceUnits"></div>
+                <div class="add-chip-row"><input type="text" id="add-serviceUnits" placeholder="New unit..."><button class="btn btn-green btn-xs" onclick="addChip('serviceUnits')">Add</button></div>
+            </div>
+            <!-- Inventory Units -->
+            <div class="card" style="margin:0;background:var(--bg-card2);">
+                <div class="card-t" style="font-size:13px;">📦 Inventory Units</div>
+                <div class="chip-list" id="chips-inventoryUnits"></div>
+                <div class="add-chip-row"><input type="text" id="add-inventoryUnits" placeholder="New unit..."><button class="btn btn-green btn-xs" onclick="addChip('inventoryUnits')">Add</button></div>
+            </div>
+            <!-- Machine Types -->
+            <div class="card" style="margin:0;background:var(--bg-card2);">
+                <div class="card-t" style="font-size:13px;">🖨️ Machine Types</div>
+                <div class="chip-list" id="chips-machineTypes"></div>
+                <div class="add-chip-row"><input type="text" id="add-machineTypes" placeholder="New type..."><button class="btn btn-green btn-xs" onclick="addChip('machineTypes')">Add</button></div>
+            </div>
+            <!-- Expense Categories -->
+            <div class="card" style="margin:0;background:var(--bg-card2);">
+                <div class="card-t" style="font-size:13px;">📤 Expense Categories</div>
+                <div class="chip-list" id="chips-expenseCategories"></div>
+                <div class="add-chip-row"><input type="text" id="add-expenseCategories" placeholder="New category..."><button class="btn btn-green btn-xs" onclick="addChip('expenseCategories')">Add</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== DEBTS ===== -->
+<div id="p-debts" class="panel">
+    <div class="stats">
+        <div class="st"><div class="st-label">Outstanding</div><div class="st-val c-red" id="dtOut">0</div><div class="st-unit">TSh</div></div>
+        <div class="st"><div class="st-label">Collected</div><div class="st-val c-green" id="dtCol">0</div><div class="st-unit">TSh</div></div>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Debts</div><div style="overflow-x:auto;"><table><thead><tr><th>Date</th><th>Customer</th><th>Service</th><th>Owed</th><th>Paid</th><th>Balance</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tbDebt"></tbody></table></div></div>
+</div>
+
+<!-- ===== REPORTS ===== -->
+<div id="p-reports" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">📊</span> Generate Report</div>
+        <div class="fr">
+            <div class="fg"><label>Type</label><select id="rptType"><option value="sales">Sales</option><option value="expenses">Expenses</option><option value="profit">Profit & Loss</option><option value="inventory">Inventory</option><option value="debts">Debts</option><option value="machines">Machines</option><option value="discounts">Discounts</option></select></div>
+            <div class="fg"><label>From</label><input type="date" id="rptFrom"></div>
+            <div class="fg"><label>To</label><input type="date" id="rptTo"></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-gold" style="width:auto;" onclick="genReport()">Generate</button><button class="btn btn-ghost" style="width:auto;" onclick="window.print()">Print</button></div>
+    </div>
+    <div class="card" id="rptCard" style="display:none;"><div class="card-t" id="rptTitle">Report</div><div id="rptContent"></div></div>
+</div>
+
+<!-- ===== USERS ===== -->
+<div id="p-users" class="panel">
+    <div class="card">
+        <div class="card-t"><span class="ic">👤</span> Add User</div>
+        <form onsubmit="submitUser(event)">
+            <div class="fr">
+                <div class="fg"><label>Full Name *</label><input type="text" id="nuName" required></div>
+                <div class="fg"><label>Username *</label><input type="text" id="nuUname" required></div>
+            </div>
+            <div class="fr">
+                <div class="fg"><label>Password *</label><input type="password" id="nuPass" required></div>
+                <div class="fg"><label>Role *</label><select id="nuRole"><option value="Manager">Manager</option><option value="Shopkeeper">Shopkeeper</option></select></div>
+            </div>
+            <button type="submit" class="btn btn-green">Add User</button>
+        </form>
+    </div>
+    <div class="card"><div class="card-t"><span class="ic">📋</span> Users</div><div style="overflow-x:auto;"><table><thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Created</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tbUsers"></tbody></table></div></div>
+</div>
+
+    </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- PAYMENT MODAL -->
+<div id="mPay" class="modal-ov"><div class="modal-bx"><div class="modal-hd"><h2>Record Payment</h2><button class="modal-x" onclick="closeM('mPay')">&times;</button></div>
+    <form onsubmit="submitPayment(event)"><div class="fg"><label>Amount (TSh) *</label><input type="number" id="payAmt" step="0.01" required></div><div class="fg"><label>Method *</label><select id="payMeth"><option>Cash</option><option>Mobile Money</option><option>Bank Transfer</option></select></div><div class="fg"><label>Notes</label><textarea id="payNotes" placeholder="Optional..."></textarea></div><button type="submit" class="btn btn-green">Record Payment</button></form>
+</div></div>
+
+<!-- DETAILS MODAL -->
+<div id="mDetail" class="modal-ov"><div class="modal-bx"><div class="modal-hd"><h2 id="mdTitle">Details</h2><button class="modal-x" onclick="closeM('mDetail')">&times;</button></div><div id="mdContent"></div></div></div>
+
+<script>
+// ============================
+// STATE
+// ============================
+let S = { user: null, role: null };
+let chartMain = null;
+let activeDebt = null;
+
+// ============================
+// DB WRAPPER
+// ============================
+const D = {
+    g(k) { try { return JSON.parse(localStorage.getItem('ob2_' + k) || '[]'); } catch(e) { return []; } },
+    s(k, v) { try { localStorage.setItem('ob2_' + k, JSON.stringify(v)); return true; } catch(e) { toast('Storage error','err'); return false; } },
+    gObj(k, def) { try { const r = localStorage.getItem('ob2_' + k); return r ? JSON.parse(r) : def; } catch(e) { return def; } },
+    sObj(k, v) { try { localStorage.setItem('ob2_' + k, JSON.stringify(v)); } catch(e) {} }
+};
+
+function toast(m, t='ok') { const c=document.getElementById('toastC'); const e=document.createElement('div'); e.className='toast toast-'+t; e.innerHTML=(t==='ok'?'✅':t==='err'?'❌':'ℹ️')+' '+m; c.appendChild(e); setTimeout(()=>{e.style.opacity='0';setTimeout(()=>e.remove(),300);},3200); }
+function fmt(n) { return Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function ds(iso) { return new Date(iso).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
+function isToday(iso) { const d=new Date(iso),t=new Date(); return d.getFullYear()===t.getFullYear()&&d.getMonth()===t.getMonth()&&d.getDate()===t.getDate(); }
+function isAdmin() { return S.role==='Director'||S.role==='Manager'; }
+function isDir() { return S.role==='Director'; }
+function openM(id) { document.getElementById(id).classList.add('open'); }
+function closeM(id) { document.getElementById(id).classList.remove('open'); }
+
+// ============================
+// DEFAULT CATEGORIES
+// ============================
+const DEFAULTS = {
+    serviceCategories: ['Printing','Photocopying','Scanning','Lamination','Binding','Design','Typing','Other'],
+    serviceUnits: ['Page','Document','Item','Hour','A4 Size','A3 Size','Copy'],
+    inventoryUnits: ['Sheet','Piece','Roll','Bottle','Cartridge','Pack','Meter','Set'],
+    machineTypes: ['Printer','Photocopier','Scanner','Laminator','Binding Machine','Other'],
+    expenseCategories: ['Rent','Utilities','Salaries','Transport','Marketing','Supplies','Maintenance','Ink & Toner','Paper','Other']
+};
+
+function getCats(key) {
+    let cats = D.gObj('cats_' + key, null);
+    if (!cats) { cats = DEFAULTS[key] || []; D.sObj('cats_' + key, cats); }
+    return cats;
+}
+function setCats(key, arr) { D.sObj('cats_' + key, arr); }
+
+// ============================
+// CHIPS UI
+// ============================
+function renderChips(key) {
+    const list = getCats(key);
+    const el = document.getElementById('chips-' + key);
+    if (!el) return;
+    el.innerHTML = list.map((c, i) => `<span class="chip">${c}<button class="del" onclick="delChip('${key}',${i})">&times;</button></span>`).join('');
+}
+
+function addChip(key) {
+    const inp = document.getElementById('add-' + key);
+    const val = inp.value.trim();
+    if (!val) return;
+    const cats = getCats(key);
+    if (cats.includes(val)) { toast('Already exists','err'); return; }
+    cats.push(val);
+    setCats(key, cats);
+    inp.value = '';
+    renderChips(key);
+    refreshDropdowns();
+    toast('Added: ' + val);
+}
+
+function delChip(key, idx) {
+    const cats = getCats(key);
+    const removed = cats.splice(idx, 1)[0];
+    setCats(key, cats);
+    renderChips(key);
+    refreshDropdowns();
+    toast('Removed: ' + removed);
+}
+
+function renderAllChips() {
+    Object.keys(DEFAULTS).forEach(k => renderChips(k));
+}
+
+// ============================
+// POPULATE DROPDOWNS FROM CATEGORIES
+// ============================
+function populateSelect(elId, catKey, placeholder) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const cats = getCats(catKey);
+    const current = el.value;
+    el.innerHTML = (placeholder ? `<option value="">${placeholder}</option>` : '') +
+        cats.map(c => `<option value="${c}">${c}</option>`).join('');
+    if (current && cats.includes(current)) el.value = current;
+}
+
+function refreshDropdowns() {
+    // Service form
+    populateSelect('svcCat', 'serviceCategories');
+    populateSelect('svcUnit', 'serviceUnits');
+    // Expense form
+    populateSelect('exCat', 'expenseCategories');
+    // Inventory form
+    populateSelect('invUnit', 'inventoryUnits');
+    // Machine form
+    populateSelect('macType', 'machineTypes');
+
+    // Inventory items in dropdowns
+    const inv = D.g('inventory');
+    const invOpts = '<option value="">Select...</option>' + inv.map((it, i) => `<option value="${i}">${it.name} (${it.quantity} ${it.unit})</option>`).join('');
+    ['svcInvItem', 'rsItem'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = invOpts; });
+
+    // Machines in dropdowns
+    const macs = D.g('machines');
+    const macOpts = '<option value="">Select...</option>' + macs.map((m, i) => `<option value="${i}">${m.name} (${m.type})</option>`).join('');
+    ['svcMacItem', 'rfMac'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = macOpts; });
+
+    // Sale: populate category dropdown (from actual services that exist)
+    const svcs = D.g('services');
+    const slCat = document.getElementById('slCat');
+    if (slCat) {
+        const usedCats = [...new Set(svcs.map(s => s.category))].sort();
+        const curCat = slCat.value;
+        slCat.innerHTML = '<option value="">Select category first...</option>' +
+            usedCats.map(c => `<option value="${c}">${c}</option>`).join('');
+        if (curCat && usedCats.includes(curCat)) slCat.value = curCat;
+    }
+
+    // Sale: service dropdown stays empty until category is chosen
+    const slSvc = document.getElementById('slSvc');
+    if (slSvc && slCat && slCat.value) {
+        const filtered = svcs.map((s, i) => ({...s, _idx: i})).filter(s => s.category === slCat.value);
+        slSvc.innerHTML = '<option value="">Select service...</option>' +
+            filtered.map(s => `<option value="${s._idx}">${s.name} — TSh ${fmt(s.defaultPrice)}/${s.unit}</option>`).join('');
+    } else if (slSvc) {
+        slSvc.innerHTML = '<option value="">Select category first...</option>';
+    }
+
+    // Services table: populate category filter
+    const svcFilter = document.getElementById('svcFilter');
+    if (svcFilter) {
+        const allCats = [...new Set(svcs.map(s => s.category))].sort();
+        const curFilter = svcFilter.value;
+        svcFilter.innerHTML = '<option value="">All Categories</option>' +
+            allCats.map(c => `<option value="${c}">${c}</option>`).join('');
+        if (curFilter && allCats.includes(curFilter)) svcFilter.value = curFilter;
+    }
+}
+
+// ============================
+// TOGGLE SERVICE FORM FIELDS
+// ============================
+function toggleSvcInv() {
+    const v = document.getElementById('svcUsesInv').value;
+    document.getElementById('svcInvGroup').style.display = v === 'yes' ? '' : 'none';
+    document.getElementById('svcInvQtyGroup').style.display = v === 'yes' ? '' : 'none';
+}
+function toggleSvcMac() {
+    const v = document.getElementById('svcUsesMac').value;
+    document.getElementById('svcMacGroup').style.display = v === 'yes' ? '' : 'none';
+}
+
+// ============================
+// SALE: AUTO-CALC & LINKED INFO
+// ============================
+document.addEventListener('input', e => {
+    if (e.target.id === 'slQty' || e.target.id === 'slPrice' || e.target.id === 'slDiscount') {
+        const q = parseFloat(document.getElementById('slQty').value) || 0;
+        const p = parseFloat(document.getElementById('slPrice').value) || 0;
+        const subtotal = q * p;
+        const disc = parseFloat(document.getElementById('slDiscount').value) || 0;
+        const final_ = Math.max(0, subtotal - disc);
+        document.getElementById('slTotal').value = 'TSh ' + fmt(subtotal);
+        document.getElementById('slFinal').value = 'TSh ' + fmt(final_);
+    }
+});
+
+document.addEventListener('change', e => {
+    // Category selected → filter service dropdown
+    if (e.target.id === 'slCat') {
+        const cat = e.target.value;
+        const slSvc = document.getElementById('slSvc');
+        const svcs = D.g('services');
+        if (!cat) {
+            slSvc.innerHTML = '<option value="">Select category first...</option>';
+            return;
+        }
+        const filtered = svcs.map((s, i) => ({...s, _idx: i})).filter(s => s.category === cat);
+        slSvc.innerHTML = '<option value="">Select service...</option>' +
+            filtered.map(s => `<option value="${s._idx}">${s.name} — TSh ${fmt(s.defaultPrice)}/${s.unit}</option>`).join('');
+        // Clear linked info
+        document.getElementById('slLinkedInfo').style.display = 'none';
+    }
+
+    if (e.target.id === 'slSvc') {
+        const idx = e.target.value;
+        const info = document.getElementById('slLinkedInfo');
+        if (idx === '') { info.style.display = 'none'; return; }
+        const svc = D.g('services')[idx];
+        if (!svc) return;
+        document.getElementById('slPrice').value = svc.defaultPrice;
+        document.getElementById('slQty').dispatchEvent(new Event('input'));
+
+        // Show linked info
+        let lines = [];
+        if (svc.usesInventory === 'yes' && svc.inventoryItemName) {
+            lines.push(`📦 Uses <strong>${svc.inventoryItemName}</strong> — ${svc.inventoryQtyPerUnit} ${svc.inventoryItemUnit || ''} per ${svc.unit}`);
+        }
+        if (svc.usesMachine === 'yes' && svc.machineName) {
+            lines.push(`🖨️ Uses <strong>${svc.machineName}</strong> — ink will be deducted`);
+        }
+        if (lines.length) { info.innerHTML = lines.join('<br>'); info.style.display = ''; }
+        else { info.style.display = 'none'; }
+    }
+});
+
+// ============================
+// INIT
+// ============================
+function togglePw() {
+    const inp = document.getElementById('lPass');
+    const btn = document.getElementById('pwToggle');
+    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; btn.title = 'Hide password'; }
+    else { inp.type = 'password'; btn.textContent = '👁️'; btn.title = 'Show password'; }
+}
+
+function init() {
+    let users = D.g('users');
+    if (!users.some(u => u.username === 'zedon')) {
+        users.push({ id: 1, fullName: 'Director', username: 'zedon', password: 'TangaSun27@OB', role: 'Director', status: 'Active', createdAt: new Date().toISOString(), createdBy: 'System' });
+        D.s('users', users);
+    }
+    try {
+        const ss = sessionStorage.getItem('ob2_session');
+        if (ss) { const p = JSON.parse(ss); if (p?.user) { S.user = p.user; S.role = p.role; showApp(); return; } }
+    } catch(e) {}
+    try {
+        const rm = localStorage.getItem('ob2_remember');
+        if (rm) { const p = JSON.parse(rm); document.getElementById('lUser').value = p.username || ''; document.getElementById('lRem').checked = true; }
+    } catch(e) {}
+}
+
+// ============================
+// AUTH
+// ============================
+function doLogin(e) {
+    e.preventDefault();
+    const u = document.getElementById('lUser').value.trim(), p = document.getElementById('lPass').value;
+    const users = D.g('users');
+    const found = users.find(x => x.username === u && x.password === p && x.status === 'Active');
+    const err = document.getElementById('loginErr');
+    if (!found) { err.textContent = 'Invalid username/password or account disabled.'; err.classList.add('show'); setTimeout(() => err.classList.remove('show'), 4000); return; }
+    S.user = found.username; S.role = found.role;
+    sessionStorage.setItem('ob2_session', JSON.stringify({ user: S.user, role: S.role }));
+    if (document.getElementById('lRem').checked) localStorage.setItem('ob2_remember', JSON.stringify({ username: S.user }));
+    else localStorage.removeItem('ob2_remember');
+    showApp();
+}
+
+function doLogout() { if (!confirm('Sign out?')) return; sessionStorage.removeItem('ob2_session'); location.reload(); }
+
+function showApp() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').classList.add('on');
+    document.getElementById('uNm').textContent = S.user;
+    document.getElementById('uRl').textContent = S.role;
+    document.getElementById('uAv').textContent = S.user.charAt(0).toUpperCase();
+    document.querySelectorAll('[data-perm="admin"]').forEach(el => { el.style.display = isAdmin() ? '' : 'none'; });
+    document.querySelectorAll('[data-perm="director"]').forEach(el => { el.style.display = isDir() ? '' : 'none'; });
+    refreshDropdowns();
+    renderAllChips();
+    refreshAll();
+    const t = new Date(), w = new Date(t.getTime() - 7*864e5);
+    const rf = document.getElementById('rptFrom'), rt = document.getElementById('rptTo');
+    if (rf) rf.valueAsDate = w; if (rt) rt.valueAsDate = t;
+}
+
+// ============================
+// NAV
+// ============================
+document.getElementById('navBar').addEventListener('click', e => {
+    if (!e.target.matches('.nav-btn')) return;
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+    e.target.classList.add('on');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+    document.getElementById('p-' + e.target.dataset.t).classList.add('on');
+    refreshAll();
+});
+
+// ============================
+// SUBMIT: SALE
+// ============================
+function submitSale(e) {
+    e.preventDefault();
+    const svcIdx = document.getElementById('slSvc').value;
+    if (svcIdx === '') { toast('Select a service','err'); return; }
+    const svcs = D.g('services');
+    const svc = svcs[svcIdx];
+    const qty = parseInt(document.getElementById('slQty').value);
+    const price = parseFloat(document.getElementById('slPrice').value);
+    const subtotal = qty * price;
+    const discount = parseFloat(document.getElementById('slDiscount').value) || 0;
+    const total = Math.max(0, subtotal - discount);
+    const customer = document.getElementById('slCust').value.trim() || 'Walk-in Customer';
+    const payment = document.getElementById('slPay').value;
+
+    let invUsed = 'None', invQtyUsed = 0;
+    let macUsed = 'None';
+
+    // AUTO-DEDUCT INVENTORY
+    if (svc.usesInventory === 'yes' && svc.inventoryItemIdx !== undefined) {
+        const inv = D.g('inventory');
+        const item = inv[svc.inventoryItemIdx];
+        if (!item) { toast('Linked inventory item not found!','err'); return; }
+        const needed = qty * (svc.inventoryQtyPerUnit || 1);
+        if (item.quantity < needed) { toast(`Not enough ${item.name}! Need ${needed}, have ${item.quantity}.`,'err'); return; }
+        item.quantity -= needed;
+        inv[svc.inventoryItemIdx] = item;
+        D.s('inventory', inv);
+        invUsed = item.name;
+        invQtyUsed = needed;
+    }
+
+    // AUTO-DEDUCT MACHINE INK
+    if (svc.usesMachine === 'yes' && svc.machineIdx !== undefined) {
+        const macs = D.g('machines');
+        const mac = macs[svc.machineIdx];
+        if (mac) {
+            mac.inkRemaining = Math.max(0, (mac.inkRemaining || 0) - qty);
+            macs[svc.machineIdx] = mac;
+            D.s('machines', macs);
+            macUsed = mac.name;
+            if (mac.inkRemaining <= mac.inkAlert) {
+                toast(`⚠️ ${mac.name} ink is low! ${mac.inkRemaining} pages left.`, 'info');
+            }
+        }
+    }
+
+    const sale = {
+        id: Date.now(), serviceName: svc.name, serviceIdx: parseInt(svcIdx),
+        quantity: qty, price, subtotal, discount, total, customerName: customer, paymentMethod: payment,
+        inventoryUsed: invUsed, inventoryQtyUsed: invQtyUsed, machineUsed: macUsed,
+        notes: document.getElementById('slNotes').value,
+        recordedBy: S.user, date: new Date().toISOString()
+    };
+
+    const sales = D.g('sales'); sales.push(sale); D.s('sales', sales);
+    if (payment === 'Credit (Debt)') {
+        const debts = D.g('debts');
+        debts.push({ id: Date.now(), saleId: sale.id, customerName: customer, itemName: svc.name, totalAmount: total, paidAmount: 0, balance: total, status: 'Unpaid', date: sale.date, payments: [] });
+        D.s('debts', debts);
+    }
+
+    toast('Sale recorded!');
+    e.target.reset();
+    document.getElementById('slLinkedInfo').style.display = 'none';
+    refreshAll();
+}
+
+// ============================
+// SUBMIT: EXPENSE
+// ============================
+function submitExpense(e) {
+    e.preventDefault();
+    const exp = { id: Date.now(), category: document.getElementById('exCat').value, amount: parseFloat(document.getElementById('exAmt').value), description: document.getElementById('exDesc').value, recordedBy: S.user, date: new Date().toISOString() };
+    const arr = D.g('expenses'); arr.push(exp); D.s('expenses', arr);
+    toast('Expense recorded!'); e.target.reset(); refreshAll();
+}
+
+// ============================
+// SUBMIT: INVENTORY
+// ============================
+function submitInventory(e) {
+    e.preventDefault();
+    if (!isAdmin()) { toast('Permission denied','err'); return; }
+    const item = { id: Date.now(), name: document.getElementById('invName').value, unit: document.getElementById('invUnit').value, quantity: parseInt(document.getElementById('invQty').value), minAlert: parseInt(document.getElementById('invMin').value), createdBy: S.user, createdAt: new Date().toISOString() };
+    const arr = D.g('inventory'); arr.push(item); D.s('inventory', arr);
+    toast('Inventory item added!'); e.target.reset(); refreshAll();
+}
+
+function submitRestock(e) {
+    e.preventDefault();
+    if (!isAdmin()) { toast('Permission denied','err'); return; }
+    const idx = document.getElementById('rsItem').value;
+    if (idx === '') return;
+    const qty = parseInt(document.getElementById('rsQty').value);
+    const inv = D.g('inventory');
+    inv[idx].quantity += qty;
+    D.s('inventory', inv);
+    // Log
+    const logs = D.g('invLogs');
+    logs.push({ id: Date.now(), itemName: inv[idx].name, qty, reason: document.getElementById('rsReason').value, by: S.user, date: new Date().toISOString() });
+    D.s('invLogs', logs);
+    toast('Restocked!'); e.target.reset(); refreshAll();
+}
+
+// ============================
+// SUBMIT: SERVICE
+// ============================
+function submitService(e) {
+    e.preventDefault();
+    if (!isAdmin()) { toast('Permission denied','err'); return; }
+    const usesInv = document.getElementById('svcUsesInv').value;
+    const usesMac = document.getElementById('svcUsesMac').value;
+    const invIdx = usesInv === 'yes' ? parseInt(document.getElementById('svcInvItem').value) : null;
+    const macIdx = usesMac === 'yes' ? parseInt(document.getElementById('svcMacItem').value) : null;
+
+    const inv = D.g('inventory');
+    const macs = D.g('machines');
+
+    const svc = {
+        id: Date.now(),
+        name: document.getElementById('svcName').value,
+        category: document.getElementById('svcCat').value,
+        unit: document.getElementById('svcUnit').value,
+        defaultPrice: parseFloat(document.getElementById('svcPrice').value),
+        usesInventory: usesInv,
+        inventoryItemIdx: invIdx,
+        inventoryItemName: (usesInv === 'yes' && inv[invIdx]) ? inv[invIdx].name : null,
+        inventoryItemUnit: (usesInv === 'yes' && inv[invIdx]) ? inv[invIdx].unit : null,
+        inventoryQtyPerUnit: usesInv === 'yes' ? parseInt(document.getElementById('svcInvQtyPer').value) || 1 : 0,
+        usesMachine: usesMac,
+        machineIdx: macIdx,
+        machineName: (usesMac === 'yes' && macs[macIdx]) ? macs[macIdx].name : null,
+        description: document.getElementById('svcDesc').value,
+        createdBy: S.user, createdAt: new Date().toISOString()
+    };
+
+    const arr = D.g('services'); arr.push(svc); D.s('services', arr);
+    toast('Service added!'); e.target.reset();
+    document.getElementById('svcInvGroup').style.display = 'none';
+    document.getElementById('svcInvQtyGroup').style.display = 'none';
+    document.getElementById('svcMacGroup').style.display = 'none';
+    document.getElementById('svcUsesInv').value = 'no';
+    document.getElementById('svcUsesMac').value = 'no';
+    refreshAll();
+}
+
+// ============================
+// SUBMIT: MACHINE
+// ============================
+function submitMachine(e) {
+    e.preventDefault();
+    if (!isAdmin()) { toast('Permission denied','err'); return; }
+    const mac = {
+        id: Date.now(),
+        name: document.getElementById('macName').value,
+        type: document.getElementById('macType').value,
+        serial: document.getElementById('macSerial').value,
+        purchaseDate: document.getElementById('macDate').value,
+        inkCapacity: parseInt(document.getElementById('macInkCap').value),
+        inkRemaining: parseInt(document.getElementById('macInkCur').value),
+        inkAlert: parseInt(document.getElementById('macInkAlert').value),
+        status: 'Active',
+        notes: document.getElementById('macNotes').value,
+        createdBy: S.user, createdAt: new Date().toISOString()
+    };
+    const arr = D.g('machines'); arr.push(mac); D.s('machines', arr);
+    toast('Machine added!'); e.target.reset(); refreshAll();
+}
+
+function submitInkRefill(e) {
+    e.preventDefault();
+    const idx = document.getElementById('rfMac').value;
+    if (idx === '') return;
+    const macs = D.g('machines');
+    macs[idx].inkRemaining = parseInt(document.getElementById('rfPages').value);
+    D.s('machines', macs);
+    toast('Ink refilled!'); e.target.reset(); refreshAll();
+}
+
+// ============================
+// SUBMIT: USER
+// ============================
+function submitUser(e) {
+    e.preventDefault();
+    if (!isDir()) { toast('Permission denied','err'); return; }
+    const uname = document.getElementById('nuUname').value.trim();
+    const users = D.g('users');
+    if (users.find(u => u.username === uname)) { toast('Username exists!','err'); return; }
+    users.push({ id: Date.now(), fullName: document.getElementById('nuName').value, username: uname, password: document.getElementById('nuPass').value, role: document.getElementById('nuRole').value, status: 'Active', createdAt: new Date().toISOString(), createdBy: S.user });
+    D.s('users', users);
+    toast('User added!'); e.target.reset(); refreshAll();
+}
+
+// ============================
+// PAYMENT
+// ============================
+function openPay(id) { activeDebt = id; const d = D.g('debts').find(x => x.id === id); if (!d) return; document.getElementById('payAmt').value = d.balance.toFixed(2); openM('mPay'); }
+function submitPayment(e) {
+    e.preventDefault();
+    const amt = parseFloat(document.getElementById('payAmt').value);
+    const debts = D.g('debts');
+    const idx = debts.findIndex(d => d.id === activeDebt);
+    if (idx === -1) return;
+    if (amt > debts[idx].balance) { toast('Exceeds balance!','err'); return; }
+    debts[idx].payments.push({ id: Date.now(), amount: amt, method: document.getElementById('payMeth').value, notes: document.getElementById('payNotes').value, recordedBy: S.user, date: new Date().toISOString() });
+    debts[idx].paidAmount += amt; debts[idx].balance -= amt;
+    if (debts[idx].balance <= 0) { debts[idx].balance = 0; debts[idx].status = 'Paid'; }
+    D.s('debts', debts);
+    toast('Payment recorded!'); closeM('mPay'); refreshAll();
+}
+
+function viewDebtH(id) {
+    const d = D.g('debts').find(x => x.id === id);
+    if (!d) return;
+    let h = `<div style="line-height:2;font-size:13px;"><p><strong>Customer:</strong> ${d.customerName}</p><p><strong>Service:</strong> ${d.itemName}</p><p><strong>Total:</strong> TSh ${fmt(d.totalAmount)}</p><p><strong>Paid:</strong> TSh ${fmt(d.paidAmount)}</p><p><strong>Balance:</strong> TSh ${fmt(d.balance)}</p><h3 style="margin-top:14px;">Payments</h3>`;
+    if (!d.payments.length) h += '<p style="color:var(--text-3)">No payments yet.</p>';
+    else { h += '<table><thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>By</th></tr></thead><tbody>'; d.payments.forEach(p => { h += `<tr><td>${ds(p.date)}</td><td>TSh ${fmt(p.amount)}</td><td>${p.method}</td><td>${p.recordedBy}</td></tr>`; }); h += '</tbody></table>'; }
+    h += '</div>';
+    document.getElementById('mdTitle').textContent = 'Payment History';
+    document.getElementById('mdContent').innerHTML = h;
+    openM('mDetail');
+}
+
+// ============================
+// DELETE HELPERS
+// ============================
+function delItem(key, idx) { if (!isDir() && key !== 'inventory') { toast('Permission denied','err'); return; } if (!confirm('Delete?')) return; const arr = D.g(key); arr.splice(idx, 1); D.s(key, arr); toast('Deleted'); refreshAll(); }
+function delSale(id) { if (!isDir()) { toast('Only Director','err'); return; } if (!confirm('Delete sale?')) return; D.s('sales', D.g('sales').filter(s => s.id !== id)); toast('Deleted'); refreshAll(); }
+function delExp(id) { if (!isDir()) return; if (!confirm('Delete?')) return; D.s('expenses', D.g('expenses').filter(e => e.id !== id)); toast('Deleted'); refreshAll(); }
+function togUser(i) { const u = D.g('users'); u[i].status = u[i].status === 'Active' ? 'Disabled' : 'Active'; D.s('users', u); toast('Updated'); refreshAll(); }
+function rstPass(i) { const pw = prompt('New password:'); if (!pw) return; const u = D.g('users'); u[i].password = pw; D.s('users', u); toast('Password reset!'); }
+function delUser(i) { if (!confirm('Delete user?')) return; const u = D.g('users'); u.splice(i, 1); D.s('users', u); toast('Deleted'); refreshAll(); }
+
+// ============================
+// RENDER TABLES
+// ============================
+function rSales() {
+    const tb = document.getElementById('tbSales'); if (!tb) return;
+    const sales = D.g('sales').slice().reverse().slice(0, 100);
+    tb.innerHTML = sales.map(s => {
+        const pb = s.paymentMethod==='Cash'?'b-green':s.paymentMethod==='Credit (Debt)'?'b-red':'b-blue';
+        const disc = s.discount || 0;
+        const sub = s.subtotal || s.total + disc;
+        return `<tr><td>${ds(s.date)}</td><td>${s.serviceName}</td><td>${s.quantity}</td><td>TSh ${fmt(s.price)}</td><td>TSh ${fmt(sub)}</td><td>${disc > 0 ? '<span class="badge b-amber">TSh ' + fmt(disc) + '</span>' : '—'}</td><td>TSh ${fmt(s.total)}</td><td>${s.customerName}</td><td><span class="badge ${pb}">${s.paymentMethod}</span></td><td>${s.inventoryUsed!=='None'?s.inventoryUsed+' ('+s.inventoryQtyUsed+')':'—'}</td><td>${s.machineUsed!=='None'?s.machineUsed:'—'}</td><td>${isDir()?`<button class="btn btn-red btn-xs" onclick="delSale(${s.id})">Del</button>`:''}</td></tr>`;
+    }).join('');
+}
+
+function rExp() {
+    const tb = document.getElementById('tbExp'); if (!tb) return;
+    tb.innerHTML = D.g('expenses').slice().reverse().slice(0,100).map(e =>
+        `<tr><td>${ds(e.date)}</td><td><span class="badge b-amber">${e.category}</span></td><td>${e.description}</td><td>TSh ${fmt(e.amount)}</td><td>${e.recordedBy}</td><td>${isDir()?`<button class="btn btn-red btn-xs" onclick="delExp(${e.id})">Del</button>`:''}</td></tr>`
+    ).join('');
+}
+
+function rInv() {
+    const tb = document.getElementById('tbInv'); if (!tb) return;
+    const inv = D.g('inventory');
+    tb.innerHTML = inv.map((it, i) => {
+        const st = it.quantity <= it.minAlert ? '<span class="badge b-red">Low</span>' : '<span class="badge b-green">OK</span>';
+        return `<tr><td><strong>${it.name}</strong></td><td>${it.unit}</td><td><strong>${it.quantity}</strong></td><td>${it.minAlert}</td><td>${st}</td><td>${isAdmin()?`<button class="btn btn-red btn-xs" onclick="delItem('inventory',${i})">Del</button>`:''}</td></tr>`;
+    }).join('');
+}
+
+function rSvc() {
+    const tb = document.getElementById('tbSvc'); if (!tb) return;
+    const svcs = D.g('services');
+    const filterEl = document.getElementById('svcFilter');
+    const filterCat = filterEl ? filterEl.value : '';
+    const filtered = filterCat ? svcs.map((s,i)=>({...s,_i:i})).filter(s=>s.category===filterCat) : svcs.map((s,i)=>({...s,_i:i}));
+    tb.innerHTML = filtered.map(s => {
+        const i = s._i;
+        return `<tr><td><strong>${s.name}</strong></td><td>${s.category}</td><td>${s.unit}</td><td>TSh ${fmt(s.defaultPrice)}</td>
+            <td><span class="badge ${s.usesInventory==='yes'?'b-amber':'b-teal'}">${s.usesInventory==='yes'?'Yes':'No'}</span></td>
+            <td>${s.inventoryItemName||'—'}</td><td>${s.inventoryQtyPerUnit||'—'}</td>
+            <td><span class="badge ${s.usesMachine==='yes'?'b-amber':'b-teal'}">${s.usesMachine==='yes'?'Yes':'No'}</span></td>
+            <td>${s.machineName||'—'}</td>
+            <td>${isAdmin()?`<button class="btn btn-red btn-xs" onclick="delItem('services',${i})">Del</button>`:''}</td></tr>`;
+    }).join('');
+}
+
+function rMac() {
+    const tb = document.getElementById('tbMac'); if (!tb) return;
+    const macs = D.g('machines');
+    tb.innerHTML = macs.map((m, i) => {
+        const pct = m.inkCapacity > 0 ? Math.round(m.inkRemaining / m.inkCapacity * 100) : 0;
+        const inkBadge = m.inkRemaining <= m.inkAlert ? 'b-red' : pct < 30 ? 'b-amber' : 'b-green';
+        const statusText = m.inkRemaining <= m.inkAlert ? 'Low Ink!' : 'OK';
+        return `<tr><td><strong>${m.name}</strong></td><td>${m.type}</td><td>${m.serial||'—'}</td><td>${m.inkCapacity}</td><td>${m.inkRemaining}</td><td><span class="badge ${inkBadge}">${pct}%</span></td><td><span class="badge ${m.inkRemaining<=m.inkAlert?'b-red':'b-green'}">${statusText}</span></td><td>${isAdmin()?`<button class="btn btn-red btn-xs" onclick="delItem('machines',${i})">Del</button>`:''}</td></tr>`;
+    }).join('');
+}
+
+function rDebts() {
+    const tb = document.getElementById('tbDebt'); if (!tb) return;
+    const debts = D.g('debts');
+    let tOut = 0, tCol = 0;
+    tb.innerHTML = debts.map(d => {
+        if (d.status !== 'Paid') tOut += d.balance;
+        tCol += d.paidAmount;
+        const sb = d.status==='Paid'?'b-green':d.paidAmount>0?'b-amber':'b-red';
+        const sl = d.status==='Paid'?'Paid':d.paidAmount>0?'Partial':'Unpaid';
+        return `<tr><td>${ds(d.date)}</td><td>${d.customerName}</td><td>${d.itemName}</td><td>TSh ${fmt(d.totalAmount)}</td><td>TSh ${fmt(d.paidAmount)}</td><td>TSh ${fmt(d.balance)}</td><td><span class="badge ${sb}">${sl}</span></td><td>${d.status!=='Paid'?`<button class="btn btn-green btn-xs" onclick="openPay(${d.id})">Pay</button>`:''} <button class="btn btn-blue btn-xs" onclick="viewDebtH(${d.id})">History</button></td></tr>`;
+    }).join('');
+    document.getElementById('dtOut').textContent = fmt(tOut);
+    document.getElementById('dtCol').textContent = fmt(tCol);
+    document.getElementById('dDebts').textContent = fmt(tOut);
+}
+
+function rUsers() {
+    const tb = document.getElementById('tbUsers'); if (!tb) return;
+    const users = D.g('users');
+    tb.innerHTML = users.map((u, i) => {
+        return `<tr><td>${u.fullName}</td><td>${u.username}</td><td><span class="badge b-purple">${u.role}</span></td><td>${ds(u.createdAt)}</td><td><span class="badge ${u.status==='Active'?'b-green':'b-red'}">${u.status}</span></td><td>${u.username!=='zedon'?`<button class="btn btn-amber btn-xs" onclick="togUser(${i})">${u.status==='Active'?'Disable':'Enable'}</button> <button class="btn btn-blue btn-xs" onclick="rstPass(${i})">Reset PW</button> <button class="btn btn-red btn-xs" onclick="delUser(${i})">Del</button>`:'<span class="badge b-blue">Admin</span>'}</td></tr>`;
+    }).join('');
+}
+
+// ============================
+// DASHBOARD
+// ============================
+function rDash() {
+    const sales = D.g('sales'), exp = D.g('expenses');
+    const tS = sales.filter(s => isToday(s.date)).reduce((a, s) => a + s.total, 0);
+    const tE = exp.filter(e => isToday(e.date)).reduce((a, e) => a + e.amount, 0);
+    document.getElementById('dSales').textContent = fmt(tS);
+    document.getElementById('dExp').textContent = fmt(tE);
+    document.getElementById('dProfit').textContent = fmt(tS - tE);
+
+    // Alerts
+    const inv = D.g('inventory'), macs = D.g('machines');
+    const alerts = [];
+    inv.filter(i => i.quantity <= i.minAlert).forEach(i => { alerts.push(`<div class="al al-amber">📦 <strong>${i.name}</strong> — ${i.quantity} ${i.unit} left (min: ${i.minAlert})</div>`); });
+    macs.filter(m => m.inkRemaining <= m.inkAlert).forEach(m => { alerts.push(`<div class="al al-red">🖨️ <strong>${m.name}</strong> — ${m.inkRemaining} pages of ink left (alert: ${m.inkAlert})</div>`); });
+    document.getElementById('alertsBox').innerHTML = alerts.length ? alerts.join('') : '<div class="al al-green">All inventory and machines are OK.</div>';
+
+    // Chart
+    const labels = [], sD = [], eD = [];
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date(); d.setDate(d.getDate()-i); d.setHours(0,0,0,0);
+        labels.push(d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}));
+        sD.push(sales.filter(s=>{const x=new Date(s.date);x.setHours(0,0,0,0);return x.getTime()===d.getTime();}).reduce((a,s)=>a+s.total,0));
+        eD.push(exp.filter(e=>{const x=new Date(e.date);x.setHours(0,0,0,0);return x.getTime()===d.getTime();}).reduce((a,e)=>a+e.amount,0));
+    }
+    const ctx = document.getElementById('mainChart'); if (!ctx) return;
+    if (chartMain) chartMain.destroy();
+    chartMain = new Chart(ctx, {
+        type: 'line', data: { labels, datasets: [
+            { label:'Sales', data:sD, borderColor:'#22c55e', backgroundColor:'rgba(34,197,94,.06)', tension:.4, fill:true, pointRadius:4, pointBackgroundColor:'#22c55e' },
+            { label:'Expenses', data:eD, borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,.06)', tension:.4, fill:true, pointRadius:4, pointBackgroundColor:'#ef4444' }
+        ]}, options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{labels:{color:'#8b99ad',font:{family:'Outfit'}}}}, scales:{x:{grid:{color:'rgba(30,42,58,.5)'},ticks:{color:'#4f5d73'}},y:{beginAtZero:true,grid:{color:'rgba(30,42,58,.5)'},ticks:{color:'#4f5d73'}}} }
+    });
+}
+
+// ============================
+// REPORTS
+// ============================
+function genReport() {
+    const type = document.getElementById('rptType').value;
+    const from = new Date(document.getElementById('rptFrom').value);
+    const to = new Date(document.getElementById('rptTo').value); to.setHours(23,59,59,999);
+    document.getElementById('rptCard').style.display = '';
+    const content = document.getElementById('rptContent');
+    const inR = d => { const dt = new Date(d); return dt >= from && dt <= to; };
+    const period = `${ds(from.toISOString())} — ${ds(to.toISOString())}`;
+
+    if (type === 'sales') {
+        const sales = D.g('sales').filter(s => inR(s.date));
+        const total = sales.reduce((a,s) => a+s.total, 0);
+        content.innerHTML = `<div class="al al-blue">Period: ${period}</div><div class="stats" style="margin-top:14px;"><div class="st"><div class="st-label">Total Revenue</div><div class="st-val c-green">${fmt(total)}</div><div class="st-unit">${sales.length} sales</div></div></div>`;
+    } else if (type === 'expenses') {
+        const exp = D.g('expenses').filter(e => inR(e.date));
+        const total = exp.reduce((a,e)=>a+e.amount,0);
+        const cats = {}; exp.forEach(e => { cats[e.category] = (cats[e.category]||0) + e.amount; });
+        content.innerHTML = `<div class="al al-blue">Period: ${period}</div><div class="st" style="margin:14px 0;"><div class="st-label">Total Expenses</div><div class="st-val c-red">${fmt(total)}</div></div><table><thead><tr><th>Category</th><th>Amount</th></tr></thead><tbody>${Object.entries(cats).map(([k,v])=>`<tr><td>${k}</td><td>TSh ${fmt(v)}</td></tr>`).join('')}</tbody></table>`;
+    } else if (type === 'profit') {
+        const sales = D.g('sales').filter(s => inR(s.date));
+        const exp = D.g('expenses').filter(e => inR(e.date));
+        const tS = sales.reduce((a,s)=>a+s.total,0), tE = exp.reduce((a,e)=>a+e.amount,0), profit = tS - tE;
+        content.innerHTML = `<div class="al al-blue">Period: ${period}</div><div class="stats" style="margin-top:14px;"><div class="st"><div class="st-label">Revenue</div><div class="st-val c-green">${fmt(tS)}</div></div><div class="st"><div class="st-label">Expenses</div><div class="st-val c-red">${fmt(tE)}</div></div><div class="st"><div class="st-label">Net Profit</div><div class="st-val ${profit>=0?'c-green':'c-red'}">${fmt(profit)}</div></div></div>`;
+    } else if (type === 'inventory') {
+        const inv = D.g('inventory');
+        content.innerHTML = `<div class="stats"><div class="st"><div class="st-label">Total Items</div><div class="st-val">${inv.length}</div></div><div class="st"><div class="st-label">Low Stock</div><div class="st-val c-red">${inv.filter(i=>i.quantity<=i.minAlert).length}</div></div></div><table><thead><tr><th>Item</th><th>Unit</th><th>Qty</th><th>Min</th><th>Status</th></tr></thead><tbody>${inv.map(i=>`<tr><td>${i.name}</td><td>${i.unit}</td><td>${i.quantity}</td><td>${i.minAlert}</td><td><span class="badge ${i.quantity<=i.minAlert?'b-red':'b-green'}">${i.quantity<=i.minAlert?'Low':'OK'}</span></td></tr>`).join('')}</tbody></table>`;
+    } else if (type === 'debts') {
+        const debts = D.g('debts');
+        const out = debts.filter(d=>d.status!=='Paid').reduce((a,d)=>a+d.balance,0);
+        const col = debts.reduce((a,d)=>a+d.paidAmount,0);
+        content.innerHTML = `<div class="stats"><div class="st"><div class="st-label">Outstanding</div><div class="st-val c-red">${fmt(out)}</div></div><div class="st"><div class="st-label">Collected</div><div class="st-val c-green">${fmt(col)}</div></div><div class="st"><div class="st-label">Active</div><div class="st-val">${debts.filter(d=>d.status!=='Paid').length}</div></div></div>`;
+    } else if (type === 'machines') {
+        const macs = D.g('machines');
+        content.innerHTML = `<table><thead><tr><th>Machine</th><th>Type</th><th>Ink Capacity</th><th>Remaining</th><th>%</th><th>Status</th></tr></thead><tbody>${macs.map(m=>{const p=m.inkCapacity>0?Math.round(m.inkRemaining/m.inkCapacity*100):0;return `<tr><td>${m.name}</td><td>${m.type}</td><td>${m.inkCapacity}</td><td>${m.inkRemaining}</td><td><span class="badge ${m.inkRemaining<=m.inkAlert?'b-red':p<30?'b-amber':'b-green'}">${p}%</span></td><td>${m.inkRemaining<=m.inkAlert?'⚠️ Low Ink':'OK'}</td></tr>`;}).join('')}</tbody></table>`;
+    } else if (type === 'discounts') {
+        const sales = D.g('sales').filter(s => inR(s.date) && (s.discount || 0) > 0);
+        const totalDisc = sales.reduce((a,s) => a + (s.discount||0), 0);
+        const totalActual = sales.reduce((a,s) => a + (s.subtotal || s.total + (s.discount||0)), 0);
+        const totalCharged = sales.reduce((a,s) => a + s.total, 0);
+        let rows = sales.map(s => {
+            const sub = s.subtotal || s.total + (s.discount||0);
+            return `<tr><td>${ds(s.date)}</td><td>${s.customerName}</td><td>${s.serviceName}</td><td>${s.quantity}</td><td>TSh ${fmt(sub)}</td><td style="color:var(--amber);font-weight:600;">TSh ${fmt(s.discount||0)}</td><td>TSh ${fmt(s.total)}</td><td>${s.recordedBy}</td></tr>`;
+        }).join('');
+        if (!rows) rows = '<tr><td colspan="8" style="text-align:center;color:var(--text-3);">No discounted sales in this period.</td></tr>';
+        content.innerHTML = `<div class="al al-blue">Period: ${period} — Showing only sales with discounts</div>
+            <div class="stats" style="margin-top:14px;">
+                <div class="st"><div class="st-label">Total Actual Amount</div><div class="st-val c-blue">${fmt(totalActual)}</div><div class="st-unit">TSh (before discounts)</div></div>
+                <div class="st"><div class="st-label">Total Discounts Given</div><div class="st-val c-amber">${fmt(totalDisc)}</div><div class="st-unit">TSh</div></div>
+                <div class="st"><div class="st-label">Total Charged</div><div class="st-val c-green">${fmt(totalCharged)}</div><div class="st-unit">TSh (after discounts)</div></div>
+                <div class="st"><div class="st-label">Discounted Sales</div><div class="st-val">${sales.length}</div><div class="st-unit">transactions</div></div>
+            </div>
+            <div style="overflow-x:auto;margin-top:16px;"><table><thead><tr><th>Date</th><th>Customer</th><th>Service</th><th>Qty</th><th>Actual Amount</th><th>Discount</th><th>Charged</th><th>Recorded By</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }
+    document.getElementById('rptTitle').textContent = document.getElementById('rptType').selectedOptions[0].text + ' Report';
+}
+
+// ============================
+// REFRESH ALL
+// ============================
+function refreshAll() {
+    refreshDropdowns();
+    rDash(); rSales(); rExp(); rInv(); rSvc(); rMac(); rDebts(); rUsers();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
